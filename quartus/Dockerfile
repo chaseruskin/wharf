@@ -41,8 +41,9 @@ RUN mkdir -p /root/quartus \
 ENV PATH "$PATH:/opt/intelFPGA_lite/19.1/quartus/bin"
 
 # Hacks for fixing malloc errors when using Quartus
+# Reference: https://community.intel.com/t5/Intel-Quartus-Prime-Software/Quartus-failed-to-run-inside-Docker-Linux/td-p/241058
 ENV LD_PRELOAD "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
-RUN mv "/opt/intelFPGA_lite/19.1/quartus/linux64/libstdc++.so.6" "/opt/intelFPGA_lite/19.1/quartus/linux64/libstdc++.so.6.err"
+RUN mv "/opt/intelFPGA_lite/19.1/quartus/linux64/libstdc++.so.6" "/opt/intelFPGA_lite/19.1/quartus/linux64/libstdc++.so.6.ignore"
 ENV LD_LIBRARY_PATH "/usr/lib/x86_64-linux-gnu/"
 
 # Enter the shell
