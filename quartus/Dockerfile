@@ -15,7 +15,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # Install image dependencies
 RUN apt-get update && apt-get -y install \
     tzdata \
-    git \
+    libglib2.0-0 \
     expect \
     libtcmalloc-minimal4 \
     locales \
@@ -39,6 +39,11 @@ RUN mkdir -p /root/quartus \
 
 # Add Quartus binaries to path 
 ENV PATH "$PATH:/opt/intelFPGA_lite/19.1/quartus/bin"
+
+# Hacks for fixing malloc errors when using Quartus
+ENV LD_PRELOAD "/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4"
+RUN mv "/opt/intelFPGA_lite/19.1/quartus/linux64/libstdc++.so.6" "/opt/intelFPGA_lite/19.1/quartus/linux64/libstdc++.so.6.err"
+ENV LD_LIBRARY_PATH "/usr/lib/x86_64-linux-gnu/"
 
 # Enter the shell
 CMD ["bash"]
