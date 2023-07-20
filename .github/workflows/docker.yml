@@ -1,6 +1,6 @@
 name: docker
 on:
-  workflow_call:
+  push:
     secrets:
       DOCKER_HUB_USERNAME:
         required: true
