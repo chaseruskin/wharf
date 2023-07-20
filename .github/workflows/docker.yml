@@ -11,6 +11,11 @@ jobs:
   build-quartus-lite:
     runs-on: ubuntu-latest
     steps:
+      - name: Free space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          
       - name: Checkout 
         uses: actions/checkout@v3
         
