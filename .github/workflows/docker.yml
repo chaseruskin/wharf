@@ -29,12 +29,12 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./quartus/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:19.1-ubuntu-18.04
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:19.1-ubuntu-18.04
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:19.1-ubuntu-18.04,mode=max
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:buildcache,mode=max
