@@ -47,8 +47,8 @@ RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
 
 # Download and install Intel Quartus Prime Lite
 RUN mkdir -p /root/modelsim \
-    && cd /root/modelsim \
-    && wget -q https://cdrdv2.intel.com/v1/dl/getContent/750531/750535?filename=ModelSimSetup-19.1.0.670-linux.run -O ./ModelSimSetup-19.1.0.670-linux.run
+    && cd /root/modelsim \    
+    && wget --spider -nv --timeout 10 -t 1 http://download.altera.com/akdlm/software/acdsinst/19.1std/670/ib_installers/ModelSimSetup-19.1.0.670-linux.run -O ./ModelSimSetup-19.1.0.670-linux.run
 
 RUN chmod +x ./ModelSimSetup-19.1.0.670-linux.run \
     && ./ModelSimSetup-19.1.0.670-linux.run --installdir /opt/altera/19.1 --accept_eula 1 --mode unattended \
