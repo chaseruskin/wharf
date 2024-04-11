@@ -57,9 +57,8 @@ RUN cd /root/modelsim \
     && ./ModelSimSetup-19.1.0.670-linux.run --installdir /opt/altera/19.1 --accept_eula 1 --mode unattended \
     && rm -rf /root/modelsim
 
-# Fix paths
-RUN mv /opt/altera/19.1/modelsim_ase/linux /opt/altera/19.1/modelsim_ase/linux_rh60 \
-    && mv /opt/altera/19.1/modelsim_ase/linuxaloem /opt/altera/19.1/modelsim_ase/linux_x86_64
+# Fix link
+RUN ln -s /opt/altera/19.1/modelsim_ase/linux /opt/altera/19.1/modelsim_ase/linux_rh60
 
 # Add Quartus binaries to path 
 ENV PATH "$PATH:/opt/altera/19.1/modelsim_ase/bin"
