@@ -36,6 +36,7 @@ RUN dpkg --add-architecture i386 && \
 RUN apt-get update && apt-get -y install \
     tzdata \
     libglib2.0-0 \
+    expect \
     locales \
     wget \
     && rm -rf /var/lib/apt/lists/*
