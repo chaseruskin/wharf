@@ -1,0 +1,68 @@
+Download web installer: https://www.xilinx.com/member/forms/download/xef.html?filename=Xilinx_Unified_2019.2_1106_2127_Lin64.bin
+
+
+chmod +x ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin
+chmod +x ./Xilinx_Unified_2019.2_1106_2127_Lin64.bin
+./Xilinx_Unified_2019.2_1106_2127_Lin64.bin
+
+chmod +x ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin
+./Xilinx_Unified_2020.1_0602_1208_Lin64.bin
+
+
+# VERSION 2021.2 VIVADO STANDARD
+https://www.xilinx.com/content/dam/xilinx/support/documents/sw_manuals/xilinx2021_2/ug973-vivado-release-notes-install-license.pdf
+
+chmod +x ./Xilinx_Unified_2021.2_1021_0703_Lin64.bin 
+./Xilinx_Unified_2021.2_1021_0703_Lin64.bin 
+
+# Uncompress the Xilinx installer
+
+
+./Xilinx_Unified_2021.2_1021_0703_Lin64.bin --keep --noexec --target ./installer
+
+# Run the setup tool in batch mode to generate configuration file
+cd installer
+./xsetup -b ConfigGen
+
+# config file created ~/.Xilinx/install_config.txt
+
+Saved authentication token file successfully, valid until 04/25/2024 09:16 PM
+
+./xsetup -b AuthTokenGen
+
+install options available here: ~/.Xilinx/install_config.txt
+Authentication available here: ~/.Xilinx/wi_authentication_key
+
+./xsetup --agree XilinxEULA,3rdPartyEULA,WebTalkTerms --batch Add --config ~/.Xilinx/install_config.txt
+
+The complete steps are:
+
+1)  Extract the files from Xilinx_Unified_2020.1_0602_1208_Lin64.bin
+
+     ./ Xilinx_Unified_2020.1_0602_1208_Lin64.bin --keep --noexec --target directory
+
+      ie.
+
+      ./ Xilinx_Unified_2020.1_0602_1208_Lin64.bin --keep --noexec --target xilinx_2020.1
+
+2) Create batch mode config file
+
+    cd xilinx_2020.1
+
+    ./xsetup -b ConfigGen
+
+    Select product from list:   I selected 1 for Vitis
+
+    Config file will created at ~/.Xilinx/install_config.txt
+
+3) Edit the config file and change the Destination if desired
+
+4) Create an Authority Token
+
+    ./xsetup -b AuthTokenGen
+
+    You will be prompted for the username and password for your Xilinx account
+
+5) Perform Download and install
+
+    ./xsetup --agree XilinxEULA,3rdPartyEULA,WebTalkTerms --batch Add --config ~/.Xilinx/install_config.txt
