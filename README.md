@@ -8,7 +8,7 @@ Each tool has its own respective directory which contains the `Dockerfile` used 
 
 ## Supported Images
 
-The following tools are available on [DockerHub](hub.docker.com/u/cdotrus):
+The following tools are available on [DockerHub](https://hub.docker.com/u/cdotrus):
 
 - ### ModelSim-Intel (Ubuntu 18.04)
 ```
