@@ -1,0 +1,1 @@
+Quartus Prime Lite 19.1 on Ubuntu 18.04.

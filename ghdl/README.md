@@ -1,0 +1,1 @@
+GHDL mcode build for Ubuntu 22.04.

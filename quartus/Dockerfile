@@ -5,7 +5,7 @@
 FROM ubuntu:18.04
 
 # LABEL about the custom image
-LABEL maintainer="crus800"
+LABEL maintainer="Chase Ruskin"
 LABEL description="Quartus Prime Lite 19.1 on Ubuntu 18.04."
 
 # Set the timezone

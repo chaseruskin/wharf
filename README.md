@@ -24,3 +24,9 @@ Quartus Prime Shell
 Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 Copyright (C) 2019  Intel Corporation. All rights reserved.
 ```
+
+- ### GHDL (Ubuntu 22.04)
+
+```
+$ ghdl -v
+```
