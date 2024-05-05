@@ -6,8 +6,6 @@ on:
         required: true
       DOCKER_HUB_ACCESS_TOKEN:
         required: true
-      DOCKER_HUB_PASSWORD:
-        required: true
 
 jobs:
   build-quartus-lite:
@@ -40,14 +38,6 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:19.1-ubuntu-18.04
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:buildcache,mode=max
-
-      - name: Update DockerHub repository description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: ${{ secrets.DOCKER_HUB_USERNAME }}/quartus-lite:19.1-ubuntu-18.04
-          readme-filepath: ./quartus/README.md
   
   build-modelsim-intel:
     runs-on: ubuntu-latest
@@ -80,14 +70,6 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/modelsim-intel:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/modelsim-intel:buildcache,mode=max
 
-      - name: Update DockerHub repository description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: ${{ secrets.DOCKER_HUB_USERNAME }}/modelsim-intel:19.1-ubuntu-18.04
-          readme-filepath: ./modelsim/README.md
-
   build-ghdl-mcode:
     runs-on: ubuntu-latest
     steps:
@@ -118,12 +100,4 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ghdl-mcode:latest-ubuntu-22.04
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ghdl-mcode:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/ghdl-mcode:buildcache,mode=max
-
-      - name: Update DockerHub repository description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          repository: ${{ secrets.DOCKER_HUB_USERNAME }}/ghdl-mcode:latest-ubuntu-22.04
-          readme-filepath: ./ghdl/README.md
                     
