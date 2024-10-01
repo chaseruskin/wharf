@@ -32,13 +32,15 @@ RUN dpkg --add-architecture i386 && \
     libxext6:i386 
     # lib32ncurses6 # not available on 18.04
 
-# Install image dependencies
+# Install image dependencies (including those for DPI)
 RUN apt-get update && apt-get -y install \
     tzdata \
     libglib2.0-0 \
     expect \
     locales \
     wget \
+    gcc-multilib \
+    g++-multilib \
     && rm -rf /var/lib/apt/lists/*
 
 # Set LOCALE to UTF8
@@ -57,10 +59,13 @@ RUN cd /root/modelsim \
     && ./ModelSimSetup-19.1.0.670-linux.run --installdir /opt/altera/19.1 --accept_eula 1 --mode unattended \
     && rm -rf /root/modelsim
 
+# Remove old GCC bundled with ModelSim
+RUN rm -rf /opt/altera/19.1/modelsim_ase/gcc-*.*.*-linux
+
 # Fix link
 RUN ln -s /opt/altera/19.1/modelsim_ase/linux /opt/altera/19.1/modelsim_ase/linux_rh60
 
-# Add Quartus binaries to path 
+# Add ModelSim binaries to path 
 ENV PATH "$PATH:/opt/altera/19.1/modelsim_ase/bin"
 
 # Enter the shell
