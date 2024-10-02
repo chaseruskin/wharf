@@ -23,7 +23,6 @@ RUN mv riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14 /opt
 
 # Add toolchain binaries to path 
 ENV PATH "$PATH:/opt/riscv/bin"
-RUN echo "export PATH=\${PATH}:/opt/riscv/bin" >> /root/.bashrc
 
 # Enter the shell
 CMD ["bash"]
