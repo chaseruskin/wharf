@@ -1,5 +1,5 @@
-# Dock: Create a docker image containing tools and programs required
-#   to run simulations.
+# Creates a docker image containing tools and programs required to run 
+# simulations.
 #
 # References: 
 #   https://staff.cs.upt.ro/~opritoiu/ca/labs/modelsim.pdf
@@ -67,6 +67,7 @@ RUN ln -s /opt/altera/19.1/modelsim_ase/linux /opt/altera/19.1/modelsim_ase/linu
 
 # Add ModelSim binaries to path 
 ENV PATH "$PATH:/opt/altera/19.1/modelsim_ase/bin"
+RUN echo "export PATH=\${PATH}:/opt/altera/19.1/modelsim_ase/bin" >> /root/.bashrc
 
 # Enter the shell
 CMD ["bash"]
