@@ -21,7 +21,10 @@ RUN tar -xvzf riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu
 # Move to install location
 RUN mv riscv64-unknown-elf-toolchain-10.2.0-2020.12.8-x86_64-linux-ubuntu14 /opt/riscv
 
-# Add toolchain binaries to path 
+# Add toolchain binaries to path (symbolic link)
+RUN ln -s /opt/riscv/bin/* /usr/local/bin/
+
+# Add toolchain binaries to path (may be lost when stacking images)
 ENV PATH "$PATH:/opt/riscv/bin"
 
 # Enter the shell
