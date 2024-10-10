@@ -24,7 +24,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN $HOME/.cargo/bin/cargo install --bin svlint --git https://github.com/dalance/svlint.git --tag $SVLINT_TAG
 RUN cp "$HOME/.cargo/bin/svlint" "/usr/local/bin/svlint"
 RUN $HOME/.cargo/bin/cargo install --bin verb --git https://github.com/chaseruskin/verb.git --rev $VERB_REV 
-RUN cp "$HOME/.cargo/bin/verb" "/user/local/bin/verb"
+RUN cp "$HOME/.cargo/bin/verb" "/usr/local/bin/verb"
 
 RUN $HOME/.cargo/bin/rustup self uninstall -y
 
