@@ -5,6 +5,7 @@ FROM ubuntu:18.04
 
 # Specific commit to use when installing from git
 ARG SVLINT_TAG
+ARG VERB_REV
 
 # LABEL about the custom image
 LABEL maintainer="Chase Ruskin"
@@ -22,11 +23,10 @@ RUN apt-get update && apt-get install -y \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN $HOME/.cargo/bin/cargo install --bin svlint --git https://github.com/dalance/svlint.git --tag $SVLINT_TAG
 RUN cp "$HOME/.cargo/bin/svlint" "/usr/local/bin/svlint"
+RUN $HOME/.cargo/bin/cargo install --bin verb --git https://github.com/chaseruskin/verb.git --rev $VERB_REV 
+RUN cp "$HOME/.cargo/bin/verb" "/user/local/bin/verb"
 
 RUN $HOME/.cargo/bin/rustup self uninstall -y
-
-# Add toolchain binaries to path
-ENV PATH "$PATH:/opt/riscv/bin"
 
 # Enter the shell
 CMD ["bash"]

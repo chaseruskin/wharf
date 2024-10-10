@@ -154,7 +154,9 @@ jobs:
           file: ./sysv/Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          build-args: SVLINT_TAG=v0.9.2
+          build-args: |
+            SVLINT_TAG=v0.9.2
+            VERB_REV=b5443aa
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sysv:1.0.0-ubuntu-18.04
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/sysv:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/sysv:buildcache,mode=max
