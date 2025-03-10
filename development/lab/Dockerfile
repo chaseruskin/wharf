@@ -21,6 +21,9 @@ RUN apt-get install -y \
 # Create symlink to call python3 as python
 RUN ln -svT /usr/bin/python3 /usr/bin/python
 
+# Update pip
+RUN pip install --upgrade pip
+
 # Install some "always needed" python libraries
 RUN pip install toml==0.10.2
 
