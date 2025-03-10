@@ -46,7 +46,7 @@ RUN export VERB_VERSION="trunk" \
     && pip install git+"https://github.com/chaseruskin/verb.git@$VERB_VERSION#egg=verb&subdirectory=src/lib/python" \
     && orbit install verb+1pgjtja7i1rcf0i5ooubqjctt --url "https://github.com/chaseruskin/verb/archive/refs/heads/$VERB_VERSION.zip" \
     && orbit install verb+5zjl2nexva03reqgbw04f48di --url "https://github.com/chaseruskin/verb/archive/refs/heads/$VERB_VERSION.zip" \
-    && cargo install --git "https://github.com/chaseruskin/verb.git" --branch "$VERB_VERSION"
+    && $HOME/.cargo/bin/cargo install --git "https://github.com/chaseruskin/verb.git" --branch "$VERB_VERSION"
 
 RUN cp "$HOME/.cargo/bin/verb" "/usr/local/bin/verb"
 
