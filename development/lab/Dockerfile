@@ -21,6 +21,9 @@ RUN apt-get install -y \
 # Create symlink to call python3 as python
 RUN ln -svT /usr/bin/python3 /usr/bin/python
 
+# Install some "always needed" python libraries
+RUN pip install toml==0.10.2
+
 # Log the tool's version
 RUN echo "python --version" >> /etc/development-tools
 
@@ -36,19 +39,35 @@ RUN $HOME/.cargo/bin/cargo install just
 RUN cp "$HOME/.cargo/bin/just" "/usr/local/bin/just"
 
 # @@@ Verb (https://github.com/chaseruskin/verb)
-RUN export HDL_INSTALLER=orbit \
-    && export PYTHON_INSTALLER=pip \
-    && export RUST_INSTALLER=$HOME/.cargo/bin/cargo \
-    && curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/chaseruskin/verb/trunk/install | bash -s --
+RUN export VERB_VERSION="trunk" \
+    && pip install git+"https://github.com/chaseruskin/verb.git@$VERB_VERSION#egg=verb&subdirectory=src/lib/python" \
+    && orbit install verb+1pgjtja7i1rcf0i5ooubqjctt --url "https://github.com/chaseruskin/verb/archive/refs/heads/$VERB_VERSION.zip" \
+    && orbit install verb+5zjl2nexva03reqgbw04f48di --url "https://github.com/chaseruskin/verb/archive/refs/heads/$VERB_VERSION.zip" \
+    && cargo install --git "https://github.com/chaseruskin/verb.git" --branch "$VERB_VERSION"
+
 RUN cp "$HOME/.cargo/bin/verb" "/usr/local/bin/verb"
 
 # Uninstall Rust compiler and tools
 RUN $HOME/.cargo/bin/rustup self uninstall -y
 
+# Add the targets (https://github.com/chaseruskin/orbit-targets)
+RUN git clone "https://github.com/chaseruskin/orbit-targets.git" "$HOME/.orbit/targets/chaseruskin"
+RUN orbit config --push include="targets/chaseruskin/config.toml"
+
+# Create an alias to pull the latest changes to the targets
+RUN echo 'alias pull-targets="git -C $HOME/.orbit/targets/chaseruskin pull"' >> /root/.bashrc
+RUN echo 'alias checkout-targets="git -C $HOME/.orbit/targets/chaseruskin checkout"' >> /root/.bashrc
+# Ensure the alias is loaded in non-interactive shells
+RUN echo 'source /root/.bashrc' >> /root/.profile
+
+# Add global git configurations
+RUN git config --global --add advice.detachedHead false
+
 # Log the tool's version
 RUN echo "orbit --version" >> /etc/development-tools
 RUN echo "just --version" >> /etc/development-tools
 RUN echo "verb --version" >> /etc/development-tools
+RUN { echo -n "orbit-targets "; git -C "$HOME/.orbit/targets/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
 
 # Enter the shell
 CMD ["/bin/bash"]
