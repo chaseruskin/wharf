@@ -70,7 +70,7 @@ RUN git config --global --add advice.detachedHead false
 RUN echo "orbit --version" >> /etc/development-tools
 RUN echo "just --version" >> /etc/development-tools
 RUN echo "verb --version" >> /etc/development-tools
-RUN { echo -n "orbit-targets "; git -C "$HOME/.orbit/targets/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
+RUN { echo -n "echo orbit-targets "; git -C "$HOME/.orbit/targets/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
 
 # Enter the shell
 CMD ["/bin/bash"]
