@@ -38,9 +38,9 @@ The following stacks are available:
 
 Stack | OS | Toolchain | Development
 -- | -- | -- | --
-`groovy-guitar` | ubuntu-22.04 | ghdl-mcode-5.0.0-dev | python, orbit, just
-`melodic-marimba` | ubuntu-22.04 | modelsim-intel-20.1.1 | python, orbit, just
-`quiet-quartet` | ubuntu-22.04 | quartus-prime-lite-23.1.1 | python, orbit, just
+`groovy-guitar` | ubuntu-22.04 | ghdl-mcode-5.0.0-dev | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
+`melodic-marimba` | ubuntu-22.04 | modelsim-intel-20.1.1 | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
+`quiet-quartet` | ubuntu-22.04 | quartus-prime-lite-23.1.1 | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
 
 Hardware development stacks are versioned by the date they were built (yyyy.mm.dd). Tool versions and the availability of tools within a stack may differ slightly between builds. If there is a large discrepancy between tools, a new stack will be created.
 

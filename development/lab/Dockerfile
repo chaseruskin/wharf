@@ -16,7 +16,8 @@ RUN apt-get install -y \
     python3 \
     python3-pip \
     curl \
-    git
+    git \
+    unzip
 
 # Create symlink to call python3 as python
 RUN ln -svT /usr/bin/python3 /usr/bin/python
@@ -29,6 +30,11 @@ RUN pip install toml==0.10.2
 
 # Log the tool's version
 RUN echo "python --version" >> /etc/development-tools
+
+# @@@ Ninja (https://github.com/ninja-build/ninja)
+RUN curl -LO https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip
+RUN unzip ninja-linux.zip
+RUN cp "ninja" "/usr/local/bin/ninja"
 
 # @@@ Orbit (https://github.com/chaseruskin/orbit)
 FROM chaseruskin/orbit:latest-ubuntu-22.04
@@ -70,6 +76,7 @@ RUN git config --global --add advice.detachedHead false
 RUN echo "orbit --version" >> /etc/development-tools
 RUN echo "just --version" >> /etc/development-tools
 RUN echo "verb --version" >> /etc/development-tools
+RUN echo "ninja --version" >> /etc/development-tools
 RUN { echo -n "echo orbit-targets "; git -C "$HOME/.orbit/targets/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
 
 # Enter the shell
