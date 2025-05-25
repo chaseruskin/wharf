@@ -35,6 +35,8 @@ RUN echo "python --version" >> /etc/development-tools
 RUN curl -LO https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip
 RUN unzip ninja-linux.zip
 RUN cp "ninja" "/usr/local/bin/ninja"
+# Log the tool's version
+RUN { echo -n "echo ninja "; ninja --version; } >> /etc/development-tools
 
 # @@@ Orbit (https://github.com/chaseruskin/orbit)
 FROM chaseruskin/orbit:latest-ubuntu-22.04
@@ -59,13 +61,15 @@ RUN cp "$HOME/.cargo/bin/verb" "/usr/local/bin/verb"
 # Uninstall Rust compiler and tools
 RUN $HOME/.cargo/bin/rustup self uninstall -y
 
-# Add the targets (https://github.com/chaseruskin/orbit-targets)
-RUN git clone "https://github.com/chaseruskin/orbit-targets.git" "$HOME/.orbit/targets/chaseruskin"
-RUN orbit config --push include="targets/chaseruskin/config.toml"
+# Add some configurations (https://github.com/chaseruskin/orbit-targets)
+RUN git clone "https://github.com/chaseruskin/orbit-targets.git" "$HOME/.orbit/plugins/chaseruskin"
+RUN orbit config --push include="plugins/chaseruskin/config.toml"
 
-# Create an alias to pull the latest changes to the targets
-RUN echo 'alias pull-targets="git -C $HOME/.orbit/targets/chaseruskin pull"' >> /root/.bashrc
-RUN echo 'alias checkout-targets="git -C $HOME/.orbit/targets/chaseruskin checkout"' >> /root/.bashrc
+# Store the proper start to a git command as an orbit configuration alias
+RUN echo 'alias orca="git -C $HOME/.orbit/plugins/chaseruskin"' >> /root/.bashrc
+# Note: To pull the latest changes, use: $ orca pull
+# Note: To checkout a version, use: $ orca checkout <tag>
+
 # Ensure the alias is loaded in non-interactive shells
 RUN echo 'source /root/.bashrc' >> /root/.profile
 
@@ -76,8 +80,7 @@ RUN git config --global --add advice.detachedHead false
 RUN echo "orbit --version" >> /etc/development-tools
 RUN echo "just --version" >> /etc/development-tools
 RUN echo "verb --version" >> /etc/development-tools
-RUN echo "ninja --version" >> /etc/development-tools
-RUN { echo -n "echo orbit-targets "; git -C "$HOME/.orbit/targets/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
+RUN { echo -n "echo plugins/chaseruskin "; git -C "$HOME/.orbit/plugins/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
 
 # Enter the shell
 CMD ["/bin/bash"]
