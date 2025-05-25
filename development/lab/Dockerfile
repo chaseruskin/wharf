@@ -65,9 +65,10 @@ RUN $HOME/.cargo/bin/rustup self uninstall -y
 RUN git clone "https://github.com/chaseruskin/orbit-targets.git" "$HOME/.orbit/plugins/chaseruskin"
 RUN orbit config --push include="plugins/chaseruskin/config.toml"
 
-# Store the proper start to a git command as an orbit configuration alias
-RUN echo 'alias orca="git -C $HOME/.orbit/plugins/chaseruskin"' >> /root/.bashrc
-# Note: To pull the latest changes, use: $ orca pull
+# Create orbit configuration assist command
+COPY development/lab/orca.bash ./.orca.bash
+RUN cat ./.orca.bash >> /root/.bashrc
+# Note: To pull the latest changes, use: $ orca chaseruskin pull
 # Note: To checkout a version, use: $ orca checkout <tag>
 
 # Ensure the alias is loaded in non-interactive shells
@@ -80,7 +81,7 @@ RUN git config --global --add advice.detachedHead false
 RUN echo "orbit --version" >> /etc/development-tools
 RUN echo "just --version" >> /etc/development-tools
 RUN echo "verb --version" >> /etc/development-tools
-RUN { echo -n "echo plugins/chaseruskin "; git -C "$HOME/.orbit/plugins/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
+RUN { echo -n "echo .orbit/plugins/chaseruskin "; git -C "$HOME/.orbit/plugins/chaseruskin" rev-parse HEAD; } >> /etc/development-tools
 
 # Enter the shell
 CMD ["/bin/bash"]
