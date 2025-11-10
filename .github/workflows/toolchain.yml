@@ -15,6 +15,10 @@ jobs:
         run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          df -h
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,6 +50,10 @@ jobs:
         run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          df -h
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -77,6 +85,10 @@ jobs:
         run: |
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo swapoff -a
+          sudo rm -f /swapfile
+          sudo apt clean
+          df -h
 
       - name: Checkout
         uses: actions/checkout@v4
