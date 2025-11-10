@@ -28,7 +28,7 @@ Examples: GHDL, Quartus Prime Lite, ModelSim-Intel Starter Edition
 
 The final layer is the [_Development_](./development/) layer, which adds various command-line utilities and tools that are used in assisting the core EDA tool workflow. These can include linters, scripting languages, package managers, and other lightweight command-line tools.
 
-Examples: Python, Orbit
+Examples: Python, Orbit, Ninja, Just
 
 ## Hardware Development Stacks
 
@@ -38,11 +38,11 @@ The following stacks are available:
 
 Stack | OS | Toolchain | Development
 -- | -- | -- | --
-`groovy-guitar` | ubuntu-22.04 | ghdl-mcode-5.0.0-dev | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
+`groovy-guitar` | ubuntu-22.04 | ghdl-mcode-5.1.1 | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
 `melodic-marimba` | ubuntu-22.04 | modelsim-intel-20.1.1 | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
 `quiet-quartet` | ubuntu-22.04 | quartus-prime-lite-23.1.1 | [python](https://www.python.org), [orbit](https://chaseruskin.github.io/orbit/), [just](https://just.systems/man/en/), [ninja](https://ninja-build.org)
 
-Hardware development stacks are versioned by the date they were built (yyyy.mm.dd). Tool versions and the availability of tools within a stack may differ slightly between builds. If there is a large discrepancy between tools, a new stack will be created.
+Hardware development stacks are versioned by the date they were built (YYYY.MM.DD). Tool versions and the availability of tools within a stack may differ slightly between builds. If there is a large discrepancy between tools, a new stack will be created.
 
 ## Usage
 

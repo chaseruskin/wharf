@@ -2,7 +2,7 @@
 # hardware development stack.
 
 # Use existing image for ghdl
-FROM ghdl/ghdl:5.0.0-dev-mcode-ubuntu-22.04
+FROM ghdl/ghdl:5.1.1-mcode-ubuntu-22.04
 
 # Custom image metadata
 LABEL maintainer="Chase Ruskin"
