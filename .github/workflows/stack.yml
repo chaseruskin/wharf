@@ -18,6 +18,8 @@ jobs:
           sudo swapoff -a
           sudo rm -f /swapfile
           sudo apt clean
+          sudo rm -rf /usr/local/lib/android
+          docker rmi $(docker image ls -aq)
           df -h
 
       - name: Checkout
@@ -102,6 +104,8 @@ jobs:
           sudo swapoff -a
           sudo rm -f /swapfile
           sudo apt clean
+          sudo rm -rf /usr/local/lib/android
+          docker rmi $(docker image ls -aq)
           df -h
 
       - name: Checkout
